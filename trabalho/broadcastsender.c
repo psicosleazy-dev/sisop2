@@ -7,6 +7,11 @@
 
 void DieWithError(char *errorMessage);  /* External error handling function */
 
+void DieWithError(char *errorMessage) {
+  perror(errorMessage);
+  exit(1);
+}
+
 int main(int argc, char *argv[])
 {
     int sock;                         /* Socket */
