@@ -16,21 +16,22 @@ int main(int argc, char *argv[])
 {
     int sock;                         /* Socket */
     struct sockaddr_in broadcastAddr; /* Broadcast address */
-    char *broadcastIP;                /* IP broadcast address */
+    char broadcastIP[100];                /* IP broadcast address */
     unsigned short broadcastPort;     /* Server port */
     char *sendString;                 /* String to broadcast */
     int broadcastPermission;          /* Socket opt to set permission to broadcast */
     unsigned int sendStringLen;       /* Length of string to broadcast */
 
-    if (argc < 4)                     /* Test for correct number of parameters */
+
+    if (argc < 1)                     /* Test for correct number of parameters */
     {
-        fprintf(stderr,"Usage:  %s <IP Address> <Port> <Send String>\n", argv[0]);
+        fprintf(stderr,"Usage:  %s <Send String>\n", argv[0]);
         exit(1);
     }
 
-    broadcastIP = argv[1];            /* First arg:  broadcast IP address */ 
-    broadcastPort = atoi(argv[2]);    /* Second arg:  broadcast port */
-    sendString = argv[3];             /* Third arg:  string to broadcast */
+    strcpy(broadcastIP,"143.54.55.63");            /* First arg:  broadcast IP address */ 
+    broadcastPort = atoi("4000");    /* Second arg:  broadcast port */
+    sendString = argv[1];             /* Third arg:  string to broadcast */
 
     /* Create socket for sending/receiving datagrams */
     if ((sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
