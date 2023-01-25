@@ -5,7 +5,6 @@
 #define AWAKEN 1
 #define M 19
 
-
 using namespace std;
 
 typedef struct host{
@@ -13,7 +12,7 @@ typedef struct host{
     char macadd[128];
     char ipadd[128];
     int status;
-} HOST;
+}HOST;
 
 typedef struct hosts{
     HOST host;
@@ -77,17 +76,14 @@ void remover(char* ipadd){
             }
 }
 
-char* makeHostname(){
-    char buffer[128];
-    sprintf(buffer,"host%d",serialnumber++);
-    return buffer;
-}
-
 int main(){
+    char buffer[128];
+    serialnumber++;
+    sprintf(buffer,"host%d",serialnumber);
     char ipaddr[100] = "127.68.90.100";
     HOST host;
 
-    host.hostname = makeHostname();
+    strcpy(host.hostname,buffer);
     strcpy(host.ipadd,"127.68.90.100");
     strcpy(host.macadd,"tal imac");
     host.status = AWAKEN;
@@ -101,7 +97,7 @@ int main(){
     printf("oi");
     remover(ipaddr);
 
-    printf("\ntabela depois da remocao: ");
+    printf("\ntabela depois da remocao: \n");
 
     imprime();
 
