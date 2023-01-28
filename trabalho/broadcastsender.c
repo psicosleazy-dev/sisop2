@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    strcpy(broadcastIP,"143.54.55.63");            /* First arg:  broadcast IP address */ 
+    strcpy(broadcastIP,"255.255.255.255"); /* First arg:  broadcast IP address */
     broadcastPort = atoi("4000");    /* Second arg:  broadcast port */
     sendString = argv[1];             /* Third arg:  string to broadcast */
 
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 
     /* Set socket to allow broadcast */
     broadcastPermission = 1;
-    if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (void *) &broadcastPermission, 
+    if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (void *) &broadcastPermission,
           sizeof(broadcastPermission)) < 0)
         DieWithError("setsockopt() failed");
 
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     for (;;) /* Run forever */
     {
          /* Broadcast sendString in datagram to clients every 3 seconds*/
-         if (sendto(sock, sendString, sendStringLen, 0, (struct sockaddr *) 
+         if (sendto(sock, sendString, sendStringLen, 0, (struct sockaddr *)
                &broadcastAddr, sizeof(broadcastAddr)) != sendStringLen)
              DieWithError("sendto() sent a different number of bytes than expected");
 
