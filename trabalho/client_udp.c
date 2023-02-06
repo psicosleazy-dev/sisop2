@@ -18,6 +18,9 @@ int main(int argc, char *argv[])
 	struct hostent *server;
 
 	char buffer[256];
+
+/*
+
 	if (argc < 2) {
 		fprintf(stderr, "usage %s hostname\n", argv[0]);
 		exit(0);
@@ -28,14 +31,14 @@ int main(int argc, char *argv[])
 	if (server == NULL) {
         fprintf(stderr,"ERROR, no such host\n");
         exit(0);
-    }
+    }*/
 
 	if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1)
 		printf("ERROR opening socket");
 
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_port = htons(PORT);
-	serv_addr.sin_addr = inet_addr("255.255.255.255");
+	serv_addr.sin_addr.s_addr = inet_addr("255.255.255.255");
 	bzero(&(serv_addr.sin_zero), 8);
 
 	printf("Enter the message: ");
