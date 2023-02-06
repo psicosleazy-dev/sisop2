@@ -21,7 +21,7 @@ broadcast(const char *mess)
 
     memset(&s, '\0', sizeof(struct sockaddr_in));
     s.sin_family = AF_INET;
-    s.sin_port = htons(BROADCAST_PORT)
+    s.sin_port = htons(BROADCAST_PORT);
     s.sin_addr.s_addr = INADDR_BROADCAST; /* This is not correct : htonl(INADDR_BROADCAST); */
 
     cli_dbgmsg("broadcast %s to %d\n", mess, broadcastSock);

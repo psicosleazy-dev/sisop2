@@ -18,21 +18,31 @@ int main(int argc, char *argv[])
 	struct hostent *server;
 
 	char buffer[256];
+<<<<<<< HEAD
 
 /*
 
 	if (argc < 2) {
+=======
+/*	if (argc < 2) {
+>>>>>>> ed638ddd983de0647b4f9a0d2d0f188046d0095b
 		fprintf(stderr, "usage %s hostname\n", argv[0]);
 		exit(0);
 
 	}
 
+
 	server = gethostbyname(argv[1]);
 	if (server == NULL) {
         fprintf(stderr,"ERROR, no such host\n");
         exit(0);
+<<<<<<< HEAD
     }*/
 
+=======
+    }
+*/
+>>>>>>> ed638ddd983de0647b4f9a0d2d0f188046d0095b
 	if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1)
 		printf("ERROR opening socket");
 
