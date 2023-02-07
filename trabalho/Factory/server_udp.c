@@ -8,10 +8,12 @@
 #include <stdio.h>
 
 #define PORT 4000
+#define MAXCONNECTIONS 3
+
 
 int serverUDP()
 {
-
+	int i = 0;
 	int sockfd, n;
 	socklen_t clilen;
 	struct sockaddr_in serv_addr, cli_addr;
@@ -31,16 +33,31 @@ int serverUDP()
 	clilen = sizeof(struct sockaddr_in);
 	
 	while (1) {
+		
 		/* receive from socket */
 		n = recvfrom(sockfd, buf, 256, 0, (struct sockaddr *) &cli_addr, &clilen);
 		if (n < 0) 
 			printf("ERROR on recvfrom");
+		if(i < MAXCONNECTIONS)
+{
+i++;
 		printf("Received a datagram: %s\n", buf);
 		
 		/* send to socket */
 		n = sendto(sockfd, "Got your message\n", 17, 0,(struct sockaddr *) &cli_addr, sizeof(struct sockaddr));
 		if (n  < 0) 
 			printf("ERROR on sendto");
+}
+else
+{
+		printf("Max Connections achieved");
+		
+		/* send to socket */
+		n = sendto(sockfd, "no\n", 17, 0,(struct sockaddr *) &cli_addr, sizeof(struct sockaddr));
+		if (n  < 0) 
+			printf("ERROR on sendto");
+
+}
 	}
 	
 	close(sockfd);
